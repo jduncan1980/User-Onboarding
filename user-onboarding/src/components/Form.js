@@ -6,9 +6,11 @@ import {
 	Checkbox,
 	FormGroup,
 	FormControlLabel,
+	FormControl,
 	Button,
 	Snackbar,
 	Typography,
+	Select,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/styles';
@@ -25,7 +27,7 @@ const useStyles = makeStyles({
 		padding: '.75rem',
 		display: 'flex',
 		flexDirection: 'column',
-		alignItems: 'center',
+		alignItems: 'flex-start',
 		justifyContent: 'center',
 	},
 	formGroup: {
@@ -67,6 +69,7 @@ const Form = () => {
 		name: '',
 		email: '',
 		password: '',
+		role: '',
 		terms: true,
 	});
 
@@ -74,6 +77,7 @@ const Form = () => {
 		name: '',
 		email: '',
 		password: '',
+		role: '',
 		terms: '',
 	});
 
@@ -93,6 +97,16 @@ const Form = () => {
 			.email('Must be a valid email address')
 			.required('Must include email'),
 		password: yup.string().required('Password is required.'),
+		role: yup
+			.mixed()
+			.oneOf([
+				'',
+				'Front-End Dev',
+				'Back-End Dev',
+				'UX Design',
+				'Project Manager',
+			])
+			.defined(),
 		terms: yup.boolean().oneOf([true]),
 	});
 
@@ -113,6 +127,7 @@ const Form = () => {
 					name: '',
 					email: '',
 					password: '',
+					role: '',
 					terms: true,
 				});
 			})
@@ -162,7 +177,7 @@ const Form = () => {
 		<>
 			<Grid container className={classes.mainGrid}>
 				<Grid item>
-					<Typography variant='h4' component='h1' align='center'>
+					<Typography variant='h1' component='h1' align='center'>
 						Employee Login
 					</Typography>
 				</Grid>
@@ -217,6 +232,24 @@ const Form = () => {
 							>
 								<Alert severity='error'>{errors.password}</Alert>
 							</Snackbar>
+
+							<FormControl>
+								<Select
+									native
+									variant='filled'
+									name='role'
+									id='role'
+									onChange={inputChange}
+								>
+									<option aria-label='None' value=''>
+										Choose Position (Optional)
+									</option>
+									<option value='Front-End Dev'>Front-End Dev</option>
+									<option value='Back-End Dev'>Back-End Dev</option>
+									<option value='UX Design'>UX Design</option>
+									<option value='Project Manager'>Project Manager</option>
+								</Select>
+							</FormControl>
 						</FormGroup>
 						<FormGroup>
 							<FormControlLabel
@@ -259,6 +292,11 @@ const Form = () => {
 									<Typography variant='subtitle1'>
 										Password: {user.password}
 									</Typography>
+									{user.role && (
+										<Typography variant='subtitle1'>
+											Role: {user.role}
+										</Typography>
+									)}
 								</Paper>
 							</Grid>
 						);
