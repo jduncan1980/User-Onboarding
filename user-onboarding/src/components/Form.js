@@ -186,6 +186,7 @@ const Form = () => {
 						<FormGroup className={classes.formGroup}>
 							<TextField
 								variant='filled'
+								inputProps={{ 'data-cy': 'name' }}
 								label='Name'
 								name='name'
 								id='name'
@@ -196,6 +197,7 @@ const Form = () => {
 							<Snackbar
 								open={snackBarOpen.name}
 								anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+								data-cy='name-error'
 							>
 								<Alert severity='error'>{errors.name}</Alert>
 							</Snackbar>
@@ -204,6 +206,7 @@ const Form = () => {
 								variant='filled'
 								label='Email'
 								name='email'
+								inputProps={{ 'data-cy': 'email' }}
 								id='email'
 								value={formState.email}
 								onChange={inputChange}
@@ -212,6 +215,7 @@ const Form = () => {
 							<Snackbar
 								open={snackBarOpen.email}
 								anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+								data-cy='email-error'
 							>
 								<Alert severity='error'>{errors.email}</Alert>
 							</Snackbar>
@@ -221,6 +225,7 @@ const Form = () => {
 								type='password'
 								label='Password'
 								name='password'
+								inputProps={{ 'data-cy': 'password' }}
 								id='password'
 								value={formState.password}
 								onChange={inputChange}
@@ -229,6 +234,7 @@ const Form = () => {
 							<Snackbar
 								open={snackBarOpen.password}
 								anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+								data-cy='password-error'
 							>
 								<Alert severity='error'>{errors.password}</Alert>
 							</Snackbar>
@@ -238,6 +244,7 @@ const Form = () => {
 									native
 									variant='filled'
 									name='role'
+									inputProps={{ 'data-cy': 'role' }}
 									id='role'
 									onChange={inputChange}
 								>
@@ -255,6 +262,7 @@ const Form = () => {
 							<FormControlLabel
 								control={
 									<Checkbox
+										inputProps={{ 'data-cy': 'terms' }}
 										name='terms'
 										id='terms'
 										checked={formState.terms}
@@ -267,6 +275,7 @@ const Form = () => {
 							/>
 
 							<Button
+								data-cy='submit'
 								variant='contained'
 								color='primary'
 								disabled={buttonDisabled}
